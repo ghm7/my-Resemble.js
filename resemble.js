@@ -141,11 +141,10 @@ var isNode = function () {
         var largeImageThreshold = 1200;
         var useCrossOrigin = true;
         var data = {};
-        data.elementBox = [];
+        data.diffPixels = [];
+        data.dimensions = {};
         var images = [];
         var updateCallbackArray = [];
-        var lastX;
-        var lastY;
 
         var tolerance = {
             // between 0 and 255
@@ -552,6 +551,9 @@ var isNode = function () {
             var context;
             var imgd;
             var pix;
+            var lastX;
+            var lastY;
+            data.dimensions = {width: width, height: height}
 
             if (!compareOnly) {
                 hiddenCanvas = createCanvas(width, height);
@@ -575,20 +577,28 @@ var isNode = function () {
                 diffBounds.bottom = Math.max(y, diffBounds.bottom);
 
                 if (lastX === undefined) {
-                    data.elementBox.push({ x: x, y: y });
+                    data.diffPixels.push({ x: x, y: y });
                     lastX = x;
                     lastY = y;
-                    return;
                 }
 
-                for (let i = 1; i <= 2; i++) {
-                    if (lastX === x - i) {
-                        data.elementBox.push({ x: x, y: y });
-                        lastX = x;
-                        lastY = y;
-                        return;
-                    }
-                }
+                // for (let i = 0; i <= 7; i++) {
+                //     if (lastX === x - i) {
+                //         if (lastY - y <= 20) {
+                //             data.diffPixels.push({ x: x, y: y });
+                //             lastX = x;
+                //         }
+                //         lastY = y;
+                //     }
+                // }
+                // if (lastX === x - 1 && lastY === y - 1) {
+                //     data.diffPixels.push({ x: x, y: y });
+                //     lastX = x;
+                //     lastY = y;
+                // }
+
+                data.diffPixels.push({ x: x, y: y });
+
             };
 
             var time = Date.now();
