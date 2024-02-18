@@ -553,7 +553,7 @@ var isNode = function () {
             var pix;
             var lastX;
             var lastY;
-            data.dimensions = {width: width, height: height}
+            data.dimensions = { width: width, height: height };
 
             if (!compareOnly) {
                 hiddenCanvas = createCanvas(width, height);
@@ -582,23 +582,7 @@ var isNode = function () {
                     lastY = y;
                 }
 
-                // for (let i = 0; i <= 7; i++) {
-                //     if (lastX === x - i) {
-                //         if (lastY - y <= 20) {
-                //             data.diffPixels.push({ x: x, y: y });
-                //             lastX = x;
-                //         }
-                //         lastY = y;
-                //     }
-                // }
-                // if (lastX === x - 1 && lastY === y - 1) {
-                //     data.diffPixels.push({ x: x, y: y });
-                //     lastX = x;
-                //     lastY = y;
-                // }
-
                 data.diffPixels.push({ x: x, y: y });
-
             };
 
             var time = Date.now();
