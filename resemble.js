@@ -59,23 +59,11 @@ var isNode = function () {
 })(this /* eslint-disable-line no-invalid-this*/, function () {
     "use strict";
 
-    var Img;
+    var Img = Image
     var Canvas;
     var loadNodeCanvasImage;
 
-    if (isNode()) {
-        Canvas = require("canvas"); // eslint-disable-line global-require
-        Img = Canvas.Image;
-        loadNodeCanvasImage = Canvas.loadImage;
-    } else {
-        Img = Image;
-    }
-
     function createCanvas(width, height) {
-        if (isNode()) {
-            return Canvas.createCanvas(width, height);
-        }
-
         var cnvs = document.createElement("canvas");
         cnvs.width = width;
         cnvs.height = height;
